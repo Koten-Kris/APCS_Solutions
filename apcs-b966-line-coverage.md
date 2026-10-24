@@ -1,4 +1,4 @@
-# [解題報告] APCS 線段覆蓋長度 (Line Coverage)
+# [解題報告] APCS b966 線段覆蓋長度 
 
 * 題目來源：[ZeroJudge b966: 線段覆蓋長度](https://zerojudge.tw/ShowProblem?problemid=b966)
 
