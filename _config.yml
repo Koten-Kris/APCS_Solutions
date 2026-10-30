@@ -1,2 +1,6 @@
+title: APCS_Solutions
+description: APCS Approach and thoughts (Contains C++ and Python Solutions)
+url: "https://Koten-Kris.github.io"
+baseurl: "/APCS_Solutions"
 plugins:
   - jekyll-sitemap
