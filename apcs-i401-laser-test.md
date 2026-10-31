@@ -78,7 +78,6 @@ int main()
     {
         bool J = true;                 //方向指標：true 往大找（右/上），false 往小找（左/下）
         pair<char, int> CS = {'Y', 0}; //Current State: {目前軸向 'X' 或 'Y', 目前的 Key 值}
-        V = 0;                         //移動步數計數器（處理起點前兩次不更動 CP 的特殊邏輯）
         
         while (true)
         {
@@ -95,7 +94,7 @@ int main()
                 if (NP != N.end()) //成功在邊界內找到下一面鏡子
                 {
                     //特殊邏輯：前兩次移動時 CP 必須為 0（因為從原點出發），之後更新為上一次的 Key
-                    if (V > 0) CP = CS.second;
+                    if (Total > 0) CP = CS.second;
                     
                     CS.first = (CS.first == 'Y') ? 'X' : 'Y'; //軸向切換
                     CS.second = NP->first;                   //更新 Key 值為新鏡子的座標
@@ -115,7 +114,7 @@ int main()
                 {
                     NP--; //往左挪一格，即為小於當前 CP 且最鄰近的鏡子
                     
-                    if (V > 0) CP = CS.second;
+                    if (Total > 0) CP = CS.second;
                     
                     CS.first = (CS.first == 'Y') ? 'X' : 'Y';
                     CS.second = NP->first;
@@ -126,7 +125,6 @@ int main()
                 else break; //跑出邊界，結束模擬
             }
             Total++; //反射次數加 1
-            V++;     //移動步數加 1
         }
     }
     cout << Total; //輸出最終總反射次數
@@ -166,7 +164,6 @@ if Y[0]:
     CP = 0             #Current Place: 紀錄目前雷射在當前軸向的座標位置
     CS = ['Y', 0]      #Current State: ['目前軸向', 當前的 Key 值]
     J = True           #方向指標: True 代表往座標大的地方找，False 代表往小的地方找
-    C = 0              #移動步數計數器（用於處理起點前兩次不更動 CP 的特殊邏輯）
     
     while True:
         #根據目前的軸向（X 或 Y）動態切換搜尋的雜湊表
@@ -179,7 +176,7 @@ if Y[0]:
             
             if N < len(NP):  #成功找到下一面鏡子
                 #特殊邏輯：前兩次移動時 CP 必須為 0（因為從原點出發），之後才更新為上一次的 Key
-                CP = CS[1] if C > 0 else 0
+                CP = CS[1] if Total > 0 else 0
                 
                 #軸向切換：橫排變直排，直排變橫排
                 CS[0] = 'X' if CS[0] == 'Y' else 'Y'
@@ -199,7 +196,7 @@ if Y[0]:
             #安全檢查，確保位置與目前的 CP 不同後，往左挪一格（找到更小的鄰近鏡子）
             if NP[N] != CP:
                 N -= 1
-                CP = CS[1] if C > 0 else 0
+                CP = CS[1] if Total> 0 else 0
                 CS[0] = 'X' if CS[0] == 'Y' else 'Y'
                 CS[1] = NP[N][0]
                 
@@ -209,7 +206,6 @@ if Y[0]:
             else:
                 break  #跑出邊界或找不到更小的鏡子，結束模擬
                 
-        C += 1
         Total += 1  #反射次數加 1
         
 print(Total)
